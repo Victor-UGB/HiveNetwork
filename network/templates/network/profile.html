@@ -1,0 +1,57 @@
+{% extends 'network/layout.html'%}
+{% load static %}
+
+{% block body %}
+
+<h1>Profile page</h1>
+<h3 style="margin-top: 3rem; font-weight: bold; color: blue;">{{user}}'s buzz profile</h3>
+
+<div style="display: flex; margin-bottom: 2rem;">
+    <div style="margin: 2rem; ">
+        
+        <p>Following</p>
+        <h8>Following: {{followings.count}} following</h8>
+        {% for following in followings.all%}
+        <h4>{{following}}</h4>
+        {% endfor %}
+    </div>
+    <div style="margin: 2rem;">
+        <p>Followers</p>
+        <h8>Followers: {{followers.count}} follower</h8>
+        {% for follower in followers.all%}
+        <h4>{{follower}}</h4>
+        {% endfor %}
+    </div>
+
+        
+</div>
+
+{% for post in posts%}
+    <div style="padding: 1rem 0rem; text-align: center;">
+        
+        <h4>{{ post.body }}</h4>
+        <h8>{{post.created_on}}</h8>
+        <h8>Likes: 0</h8>
+        {% if page_user is user.id %}
+        <button class="edit_post">Edit</button>
+        {% else  %}
+        <button>Like</button>
+        {% endif %}
+
+        <div class="editPanels hidePanels" style="">
+            Edit Post
+            <div>
+                <form action="{% url 'save_edit' post.id %}" method="POST">
+                    {% csrf_token %}
+                    <input type="text" value="{{post.body}}" name="post-edit" autofocus>
+                    <input type="submit">
+                </form>
+            </div>
+        </div>
+        {% comment %} <h2{{page_user}}></h2>
+        <h2{{user}}></h2> {% endcomment %}
+
+    </div>
+{% endfor %}
+
+{% endblock %}

@@ -1,0 +1,67 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&family=Righteous&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
+@import url("https://fonts.googleapis.com/css?family=Roboto+Condensed");
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&family=Righteous&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
+
+*, body{
+    font-family: 'Montserrat', sans-serif !important;
+}
+
+.buzz{
+    display: flex;
+    flex-direction: column ;
+    margin: 1rem;
+    width: 100%;
+    
+}
+/* 
+.buzz-text{
+    border: 1px solid gray;
+    color: aliceblue;
+    background-color: darkgrey;
+} */
+
+i{
+    font-weight:lighter !important;
+    font-size: small;
+    padding-bottom: .5rem;
+}
+
+form{
+    margin: 1rem !important;
+}
+
+.buzz-body{
+    display: flex !important;
+    
+}
+
+.buzz-profile-pic{
+    min-width: 3rem !important;
+}
+
+.like_button{
+    display: flex;
+    margin: 0 0 1.5rem 0;
+    max-width: max-content;
+    background-color: red;
+    color: white; 
+    border: none;
+}
+.edit_post{
+    display: flex;
+    margin: 0 0 1.5rem 0;
+    max-width: max-content;
+    color: gray; 
+    border: none;
+}
+
+#activePanel{
+    display: block;
+}
+
+#inactivePanel{
+    display: block;
+}
+.hidePanels{
+    display: none;
+}
