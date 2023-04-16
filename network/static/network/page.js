@@ -111,11 +111,11 @@ function likehandler(id, activeButton, activeLikeCount){
         if(post.liked == false){
             
             console.log(`Is this post liked ${post.liked} was false`)
-            console.log("disliked")
-            i = parseInt(activeLikeCount.innerHTML) - 1
+            console.log("liked")
+            i = parseInt(activeLikeCount.innerHTML) + 1
             console.log(`Int version${ i } `)
             activeLikeCount.innerHTML = i
-            activeButton.innerHTML = "Disliked Now Like";
+            activeButton.innerHTML = "Liked Now Dislike";
             const splitData = post.data.split(/[|]|{|}/)
             const likerData = splitData[2]
             const splitDataDict = likerData.split(":")
@@ -135,10 +135,10 @@ function likehandler(id, activeButton, activeLikeCount){
             console.log("liked")
             like_count = activeButton.nextElementSibling
             console.log(` number of likes: ${like_count}`)
-            i = parseInt(activeLikeCount.innerHTML) + 1
+            i = parseInt(activeLikeCount.innerHTML) - 1
             console.log(`Int version${ i-1 } `)
             activeLikeCount.innerHTML = i
-            activeButton.innerHTML = "Liked now Dislike";
+            activeButton.innerHTML = "Disliked now Like";
             const splitData = post.data.split(/[|]|{|}/)
             console.log(splitData[2])
             const likerData = splitData[2]

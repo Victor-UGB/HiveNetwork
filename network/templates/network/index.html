@@ -27,10 +27,10 @@
                     {% else  %}
                         {% if post in user_profile.likes.all %}
                         {%csrf_token%}
-                        <button class="like_button" onclick="location.href='{%url 'like' post.id%}"> Like </button>
+                        <button class="like_button" onclick="location.href='{%url 'like' post.id%}"> Dislike </button>
                         {% else %}
                         {%csrf_token%}
-                        <button class="like_button" onclick="location.href='{%url 'like' post.id%}"> Dislike </button>
+                        <button class="like_button" onclick="location.href='{%url 'like' post.id%}"> Like </button>
                         {%endif%}
                 {% endif %}
                 </div>

@@ -118,6 +118,7 @@ def like(request, id):
         else:
             
             post.liked.remove(user_profile)
+            post.save()
             print(f'These are the profiles that have liked this post: {post.liked.all()}')
             return JsonResponse({"liked": True, "data": data})
 
