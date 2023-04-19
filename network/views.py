@@ -97,6 +97,50 @@ def profile(request, user):
         "page_user": page_user.id
     })
 
+def following_posts(request, user):
+    #get the user and user's profile
+    get_user_object = get_object_or_404(User, username=user)
+    print(get_user_object)
+    get_profile = get_object_or_404(Profile, user=get_user_object)
+    print(get_profile)
+
+    #get the people that the user follows
+    profile_following = get_profile.following.all()
+    all_post  = Post.objects.all()
+    print(all_post)
+
+    first_profile = profile_following[0]
+    print(profile_following)
+    print(first_profile)
+    first_profile_obj = Profile.objects.filter(user=first_profile)
+    print(first_profile_obj)
+    first_profile_posts = Post.objects.filter(author=first_profile_obj[0])
+    print(first_profile_posts)
+
+    select_profiles = [i for i in profile_following]
+    print(select_profiles)
+    p = [ i.slug for i in select_profiles]
+    print(p)
+    select_posts = [i for i in all_post if i.author != None and i.author.user.slug in p]
+
+    print(select_posts)
+
+
+
+    
+
+    # for i in all_post:
+    #     # if i.author in profile_following:
+    #     select_posts.update(i)
+    
+        # print(select_posts)
+
+
+    return render(request, 'network/following_posts.html', {
+        'profiles_following': profile_following,
+        'posts': select_posts
+    } )
+    #get the post of the 'followings'
 
 @login_required
 def like(request, id):

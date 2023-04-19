@@ -6,10 +6,13 @@
     <form action="{% url 'index'%}" method="POST">
         {% csrf_token %}
         {{form}}
-        <input type="submit" value="Post">
+        <input class="buzz-button" type="submit" value="Post">
     </form>
     
-    <h5 style="padding: 1rem; text-align: center;">The latest buzz from your beez</h5>
+    <div class="sub-title">
+        <h6 >Latest buzz from your beez</h6>
+        <h4 id="last-update" style="font-size:smaller;">last update:</h4>
+    </div>
     <div style="background-color: #f8f9fa; border-radius: 18px;" class="posts">
         
         {% for post in posts %}

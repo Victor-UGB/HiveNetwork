@@ -10,9 +10,9 @@ class NewPostForm(ModelForm):
         model = Post
 
         labels = {
-            "body" : "Buzz here"
+            "body" : ""
         }
         fields = ('body',)
         widgets = {
-            'body': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'What\'s on your mind', 'label': 'Buzz here'})
+            'body': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Buzz here', 'style': 'height:5rem; margin-bottom: 1rem; font-weight:400; background-color: aquamarine; border:none;'})
         }
