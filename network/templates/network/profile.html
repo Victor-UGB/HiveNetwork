@@ -3,42 +3,79 @@
 
 {% block body %}
 
-<h1>Profile page</h1>
-<h3 style="margin-top: 3rem; font-weight: bold; color: blue;">{{user}}'s buzz profile</h3>
-
-<div style="display: flex; margin-bottom: 2rem;">
-    <div style="margin: 2rem; ">
-        
-        <p>Following</p>
-        <h8>Following: {{followings.count}} following</h8>
-        {% for following in followings.all%}
-        <h4><a href={% url 'following_posts' user%}> {{following}} </a></h4>
-        {% endfor %}
-    </div>
-    <div style="margin: 2rem;">
-        <p>Followers</p>
-        <h8>Followers: {{followers.count}} follower</h8>
-        {% for follower in followers.all%}
-        <h4>{{follower}}</h4>
-        {% endfor %}
-    </div>
-
-        
+<div style="padding:1rem;">
+<h7 style="color: gainsboro; padding:1rem; font-weight:600; font-size:smaller;">Profile page</h7>
+<h6 style="margin-top: 0rem; font-weight: bold; color: blue; padding:0rem 1rem;">{{user}}'s Hive</h6>
 </div>
+<div class="profile-summary">
+    <div style="align-self: center; padding: .5rem;">
+        <div style="background-color:gray; height:5rem; width: 5rem; border-radius:10px;">
 
+        </div>
+    </div>
+    <div style="display:flex; flex-wrap: wrap;">
+        <div style="margin: 0rem 1rem; align-self:center;">
+            
+            <p style="color:#535658; font-weight:700; font-size: smaller; margin-bottom:2px;">Following:</p>
+            <h8 style="color: aquamarine; padding:0rem .2rem; font-weight:900;">{{followings.count}}</h8>
+            {% for following in followings.all%}
+            <h8 style="margin-bottom:0px;"><a href={% url 'following_posts' user%}> {{following}} </a></h8>
+            {% endfor %}
+        </div>
+        <div style="margin: 0rem 1rem; align-self: center;">
+            <p style="color:#535658; font-weight:700; font-size: smaller; margin-bottom:2px;">Followers:</p>
+            <h8 style="color: aquamarine; font-weight:900; padding:0rem .2rem;">{{followers.count}}</h8>
+            {% for follower in followers.all%}
+            <h8 style="margin-bottom:0px;">{{follower}}</h8>
+            {% endfor %}
+        </div>
+        <div style="align-self: center; padding:0rem 1rem;">
+            <button class="follow-button">Follow</button>
+        </div>
+    </div>
+    
+</div>
+<hr style="margin:0; border: 1px solid black;">
+<div style="background-color: #f8f9fa; border-radius: 18px;" class="posts">
 {% for post in posts%}
-    <div style="padding: 1rem 0rem; text-align: center;">
-        
-        <h4>{{ post.body }}</h4>
-        <h8>{{post.created_on}}</h8>
-        <h8>Likes: 0</h8>
-        {% if page_user is user.id %}
-        <button class="edit_post">Edit</button>
-        {% else  %}
-        <button>Like</button>
-        {% endif %}
-
-        <div class="editPanels hidePanels" style="">
+<div class="buzz-body">
+    <div class="buzz-profile-pic"></div>
+    <div class="buzz">
+        <div style="display:flex; justify-content: space-between;">
+            <h6 > <a href="{%url 'profile' post.author%}">@{{post.author}} </a> <span style="font-size:13px; font-weight:400; color: gainsboro;">buzzed</span> </h6>
+            <i style="color:gainsboro;">{{post.created_on}}</i>
+        </div>
+        <div>
+            <h6 class="buzz-text">{{post.body}}</h6>
+            {% if post.author.user.id is page_user %}
+            <button class="edit_post edit-button">Edit</button>
+            
+            {% else  %}
+                {% if post in user_profile.likes.all %}
+                {%csrf_token%}
+                <button class="like_button" onclick="location.href='{%url 'like' post.id%}"> Dislike </button>
+                {% else %}
+                {%csrf_token%}
+                <button class="like_button" onclick="location.href='{%url 'like' post.id%}"> Like </button>
+                {%endif%}
+                {% endif %}
+                {% if post.author.user.id is page_user %}
+                <div class="editPanels hidePanels" style="">
+                    Edit Post
+                    <div>
+                        <form action="{% url 'save_edit' post.id %}" method="POST">
+                            {% csrf_token %}
+                            <input type="text" value="{{post.body}}" name="post-edit" autofocus>
+                            <input type="submit">
+                        </form>
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+            
+            </div>
+            
+            <div class="editPanels hidePanels" style="">
             Edit Post
             <div>
                 <form action="{% url 'save_edit' post.id %}" method="POST">
@@ -50,8 +87,10 @@
         </div>
         {% comment %} <h2{{page_user}}></h2>
         <h2{{user}}></h2> {% endcomment %}
-
+        <p style="color: gainsboro; font-weight: 600; font-size:smaller; padding:2rem;"><span id="like-count" class="like_count">{{post.liked.all.count}} </span>like(s)</p>
     </div>
+    <hr style="margin:0; border: 1px solid black;">
 {% endfor %}
+</div>
 
 {% endblock %}

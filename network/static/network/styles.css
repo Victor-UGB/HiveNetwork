@@ -18,12 +18,11 @@ html{
     width: 100%;
     
 }
-/* 
+
 .buzz-text{
-    border: 1px solid gray;
-    color: aliceblue;
-    background-color: darkgrey;
-} */
+
+    color: aquamarine;
+}
 
 .buzz-button{
     width: 100%;
@@ -39,7 +38,8 @@ html{
 .navbar-brand{
     padding: 0.5rem;
     font-weight: 900;
-    color: rgb(17, 95, 229)!important;
+    color: rgb(125, 163, 228)!important;
+    font-size: larger !important;
 }
 
 .nav-link{
@@ -63,7 +63,7 @@ form{
 }
 
 .sub-title{
-    padding-top: 1rem; 
+    padding: 3rem 0rem 2rem 0rem; 
     text-align: center !important;
     color: gainsboro;
 }
@@ -74,12 +74,16 @@ form{
 
 .like_button{
     display: flex;
-    margin: 0 0 1.5rem 0;
+    margin: 2rem 0 1rem 0;
     max-width: max-content;
-    background-color: red;
     color: white; 
-    border: none;
+    border: 1px rgb(31, 31, 190) solid;
+    border-radius: 2px;
+    font-size: smaller;
+    padding: 2px 12px;
 }
+
+
 .edit_post{
     display: flex;
     margin: 0 0 1.5rem 0;
@@ -97,4 +101,95 @@ form{
 }
 .hidePanels{
     display: none;
+}
+
+
+/* Profile Page */
+.profile-summary{
+    display: flex; 
+    margin-bottom: 2rem;
+    justify-content: start;
+    padding: 0rem 2rem;
+}
+
+.follow-button{
+    padding: 2px 22px;
+    background-color:rgb(125, 163, 228) !important;
+    color: white;
+    border: 0;
+    border-radius: 2px;
+}
+
+@media only screen and (min-width: 600px){
+    body{
+        min-width: 100% !important;
+    }
+    .form-control{
+        height: 15rem !important; 
+        margin: 2rem 0rem;
+        padding: 1.5rem 2rem;
+        font-size: 2.5rem;
+        font-weight: medium !important;
+        border-radius: 8px;
+    }
+    .buzz-form{
+        padding: 2rem;
+    }
+    .navbar-brand{
+        font-size: 4rem !important;
+    }
+    .buzz-button{
+        margin-top:1rem;
+        font-size: 2.5rem !important;
+        padding: 1.2rem ;
+        border-radius: 8px;
+    }
+    .sub-title{
+        padding: 5rem 0rem 5rem 0rem;
+    }
+    .sub-title h6{
+        font-size: 2.5rem;
+    }
+    .sub-title h4{
+        font-size: 2rem !important;
+    }
+    .buzz-cred{
+        font-size: 2.5rem;
+    }
+    .buzz-cred span{
+        font-size: 2rem !important;
+    }
+    .buzz-text{
+        font-size: 2.5rem;
+        padding: 1rem 0px;
+    }
+    .buzz-profile-pic {
+        min-width: 8rem !important;
+        padding: 1.5rem;
+    }
+    .buzz-body{
+        padding: 2rem .5rem;
+    }
+    .like_button{
+        font-size: 2rem;
+        padding: .6rem 3rem;
+        margin: 3rem 0 2rem 0;
+    }
+    .edit_button{
+        font-size: 2rem;
+        padding: .6rem 3rem;
+        margin: 3rem 0 2rem 0;
+    }
+    .buzz i{
+        font-size: 1.8rem;
+    }
+    .buzz-body p{
+        font-size: 1.8rem !important;
+    }
+    .pagination{
+        font-size: 3rem;
+    }
+    .nav-link{
+        font-size:2rem;
+    }
 }

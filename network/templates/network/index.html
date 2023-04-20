@@ -3,27 +3,32 @@
 
 {% block body %}
 
-    <form action="{% url 'index'%}" method="POST">
+    <form class="buzz-form" action="{% url 'index'%}" method="POST">
         {% csrf_token %}
         {{form}}
         <input class="buzz-button" type="submit" value="Post">
     </form>
     
     <div class="sub-title">
-        <h6 >Latest buzz from your beez</h6>
+        <h6 >Latest Buzz From Your Beez</h6>
         <h4 id="last-update" style="font-size:smaller;">last update:</h4>
     </div>
+    <hr style="margin:0; border: 1px solid black;">
     <div style="background-color: #f8f9fa; border-radius: 18px;" class="posts">
         
         {% for post in posts %}
         <div class="buzz-body">
-            <div class="buzz-profile-pic"></div>
+            <div class="buzz-profile-pic">
+                <div style="background-color:gray; height:5rem; width: 7rem; height:7rem; border-radius:100px;"></div>
+            </div>
             <div class="buzz">
-                <i>{{post.created_on}}</i>
-                <h6 > <a href="{%url 'profile' post.author%}">@{{post.author}} </a> <span style="font-size:13px; font-weight:400;">buzzed</span> </h6>
-                
-                <div><h6 style="padding: 1rem 0rem;" class="buzz-text">{{post.body}}</h6>
-                    <hr style="border-top: 1px solid black;">
+                <div style="display:flex; justify-content: space-between;">
+                    <h6 class="buzz-cred"> <a href="{%url 'profile' post.author%}">@{{post.author}} </a> <span style="font-size:13px; font-weight:400; color: gainsboro;">buzzed</span> </h6>
+                    <i style="color:gainsboro;">{{post.created_on}}</i>
+                </div>
+                <div>
+                    <h6 class="buzz-text">{{post.body}}</h6>
+
                     {% if post.author.user.id is page_user %}
                     <button class="edit_post edit-button">Edit</button>
                     
@@ -49,14 +54,10 @@
                     </div>
                 </div>
                 {% endif %}
-                
-                
-                    
-                
             </div>
-            <p><span id="like-count" class="like_count">{{post.liked.all.count}} </span>like(s)</p>
+            <p style="color: gainsboro; font-weight: 600; font-size:smaller; padding:2rem;"><span id="like-count" class="like_count">{{post.liked.all.count}} </span>like(s)</p>
         </div>
-        <hr style="margin:0;">
+        <hr style="margin:0; border: 1px solid black;">
         {%endfor%}
     </div>
     <div class="pagination">
