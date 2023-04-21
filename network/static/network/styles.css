@@ -70,6 +70,7 @@ form{
 
 .buzz-profile-pic{
     min-width: 3rem !important;
+    padding: 1.5rem;
 }
 
 .like_button{
@@ -120,7 +121,7 @@ form{
     border-radius: 2px;
 }
 
-@media only screen and (min-width: 600px){
+@media all and (max-width: 980px){
     body{
         min-width: 100% !important;
     }
@@ -166,6 +167,10 @@ form{
     .buzz-profile-pic {
         min-width: 8rem !important;
         padding: 1.5rem;
+    }
+    .buzz-profile-pic div{
+        width: 5rem !important;
+        height: 5rem !important;
     }
     .buzz-body{
         padding: 2rem .5rem;

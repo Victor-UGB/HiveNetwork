@@ -10,7 +10,6 @@
 <div class="profile-summary">
     <div class="profile-summary-img" style="align-self: center; padding: .5rem;">
         <div style="background-color:gray; height:5rem; width: 5rem; border-radius:10px;">
-
         </div>
     </div>
     <div style="display:flex; flex-wrap: wrap; justify-content: start;">
@@ -22,7 +21,7 @@
             <h8 style="margin-bottom:0px;"><a href={% url 'following_posts' user%}> {{following}} </a></h8>
             {% endfor %}
         </div>
-        <div style="margin: 0rem 1rem; align-self: center;">
+        <div class="profile-summary-follow" style="margin: 0rem 1rem; align-self: center;">
             <p style="color:#535658; font-weight:700; font-size: smaller; margin-bottom:2px;">Followers:</p>
             <h8 style="color: aquamarine; font-weight:900; padding:0rem .2rem;">{{followers.count}}</h8>
             {% for follower in followers.all%}
@@ -40,7 +39,7 @@
 {% for post in posts%}
 <div class="buzz-body">
     <div class="buzz-profile-pic">
-        <div style="background-color:gray; width: 7rem; height:7rem; border-radius:100px;"></div>
+        <div style="background-color:gray; width: 3.5rem; height:3.5rem; border-radius:100px;"></div>
     </div>
     <div class="buzz">
         <div style="display:flex; justify-content: space-between;">
