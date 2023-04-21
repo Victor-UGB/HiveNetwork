@@ -3,18 +3,18 @@
 
 {% block body %}
 
-<div style="padding:1rem;">
-<h7 style="color: gainsboro; padding:1rem; font-weight:600; font-size:smaller;">Profile page</h7>
-<h6 style="margin-top: 0rem; font-weight: bold; color: blue; padding:0rem 1rem;">{{user}}'s Hive</h6>
+<div class="profile-intro" style="padding:1rem;">
+    <h7 style="color: gainsboro; padding:1rem; font-weight:600; font-size:smaller;">Profile page</h7>
+    <h6 style="margin-top: 0rem; font-weight: bold; color: blue; padding:0rem 1rem;">{{user}}'s Hive</h6>
 </div>
 <div class="profile-summary">
-    <div style="align-self: center; padding: .5rem;">
+    <div class="profile-summary-img" style="align-self: center; padding: .5rem;">
         <div style="background-color:gray; height:5rem; width: 5rem; border-radius:10px;">
 
         </div>
     </div>
-    <div style="display:flex; flex-wrap: wrap;">
-        <div style="margin: 0rem 1rem; align-self:center;">
+    <div style="display:flex; flex-wrap: wrap; justify-content: start;">
+        <div class="profile-summary-follow" style="margin: 0rem 1rem; align-self:center;">
             
             <p style="color:#535658; font-weight:700; font-size: smaller; margin-bottom:2px;">Following:</p>
             <h8 style="color: aquamarine; padding:0rem .2rem; font-weight:900;">{{followings.count}}</h8>
@@ -29,7 +29,7 @@
             <h8 style="margin-bottom:0px;">{{follower}}</h8>
             {% endfor %}
         </div>
-        <div style="align-self: center; padding:0rem 1rem;">
+        <div class="follow-button-div" style="align-self: center; padding:0rem 1rem;">
             <button class="follow-button">Follow</button>
         </div>
     </div>
@@ -39,10 +39,12 @@
 <div style="background-color: #f8f9fa; border-radius: 18px;" class="posts">
 {% for post in posts%}
 <div class="buzz-body">
-    <div class="buzz-profile-pic"></div>
+    <div class="buzz-profile-pic">
+        <div style="background-color:gray; width: 7rem; height:7rem; border-radius:100px;"></div>
+    </div>
     <div class="buzz">
         <div style="display:flex; justify-content: space-between;">
-            <h6 > <a href="{%url 'profile' post.author%}">@{{post.author}} </a> <span style="font-size:13px; font-weight:400; color: gainsboro;">buzzed</span> </h6>
+            <h6 class="buzz-cred"> <a href="{%url 'profile' post.author%}">@{{post.author}} </a> <span style="font-size:13px; font-weight:400; color: gainsboro;">buzzed</span> </h6>
             <i style="color:gainsboro;">{{post.created_on}}</i>
         </div>
         <div>

@@ -192,4 +192,47 @@ form{
     .nav-link{
         font-size:2rem;
     }
+
+    /* Profile Page Mobile */
+
+    .profile-intro{
+        padding: 2rem 3rem !important;
+    }
+    .profile-intro h7{
+        font-size: 2rem !important;
+        padding: 1rem;
+    }
+    .profile-intro h6{
+        font-size: 1.8rem;
+        padding: 0rem 1rem;
+    }
+    .profile-summary{
+        padding: 3rem;
+        align-self: center;
+        display: flex;
+    }
+    .profile-summary-img{
+        padding: 2rem !important;
+    }
+    .profile-summary-img > div{
+        width: 10rem !important;
+        height: 10rem !important;
+    }
+    .profile-summary-follow{
+        padding: 0rem 3rem;
+    }
+    .profile-summary p{
+        font-size: 2rem !important;
+    }
+    .profile-summary h8{
+        font-size: 2.3rem;
+    }
+    .follow-button{
+        font-size: 2.5rem;
+        padding: 0rem 8rem;
+    }
+    .follow-button-div{
+        padding: 3rem !important;
+        display: flex;
+    }
 }
