@@ -15,31 +15,34 @@
     </head>
     <body>
 
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand" href="{%url 'index'%}">Network</a>
-          
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="background-color: #212529;">
+            <a class="navbar-brand" href="{%url 'index'%}">Hive </br> Network</a>
+        
             <div>
-              <ul class="navbar-nav mr-auto">
-                {% if user.is_authenticated %}
-                    <li class="nav-item">
-                        <a class="nav-link" href="#"><strong>{{ profile.user.username }}</strong></a>
-                    </li>
-                {% endif %}
-                <li class="nav-item">
-                  <a class="nav-link" href="{% url 'index' %}">All Posts</a>
+            <ul class="navbar-nav mr-auto" >
+                <li class="nav-item" >
+                    <a class="nav-link" href="#"><strong>{{ profile.user.username }}</strong></a>
                 </li>
                 {% if user.is_authenticated %}
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Following</a>
+                    <li class="nav-item" style="background-color:#343a40; ">
+                        <a class="nav-link" href="#"><strong style="background-color:#343a40; color:aquamarine;">{{ user }}</strong></a>
                     </li>
-                    <li class="nav-item">
+                {% endif %}
+                <li class="nav-item" style="background-color:#343a40;">
+                <a class="nav-link" href="{% url 'index' %}">All Posts</a>
+                </li>
+                {% if user.is_authenticated %}
+                    <li class="nav-item" style="background-color:#343a40;">
+                        <a class="nav-link" href="{% url 'following_posts' user%}">Following</a>
+                    </li>
+                    <li class="nav-item" style="background-color:#343a40;">
                         <a class="nav-link" href="{% url 'logout' %}">Log Out</a>
                     </li>
                 {% else %}
-                    <li class="nav-item">
+                    <li class="nav-item" style="background-color:#343a40;">
                         <a class="nav-link" href="{% url 'login' %}">Log In</a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item" style="background-color:#343a40;">
                         <a class="nav-link" href="{% url 'register' %}">Register</a>
                     </li>
                 {% endif %}

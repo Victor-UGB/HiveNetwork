@@ -41,13 +41,16 @@ def index(request):
             return HttpResponseRedirect(reverse("index"))
             
     user = request.user
-    user_profile = get_object_or_404(Profile, user=user)
-    return render(request, "network/index.html", {
-        'posts' : page_obj,
-        'form' : form,
-        "user_profile": user_profile,
-        "page_user": current_user.id
-    })
+    try:
+        user_profile = get_object_or_404(Profile, user=user)
+        return render(request, "network/index.html", {
+            'posts': page_obj,
+            'form': form,
+            "user_profile": user_profile,
+            "page_user": current_user.id
+        })
+    except:
+        return JsonResponse({"error": "Anonymouse User"})
 
     
 
@@ -82,21 +85,72 @@ def save_edit(request, id):
 def profile(request, user):
     # filter post that were created by user
 
+    print(f"This is the request of user signed-in {request}")
     page_user = request.user
+    print(f"This is the page user{page_user}")
     get_user_object = get_object_or_404(User, username=user)
     profile = get_object_or_404(Profile, user=get_user_object)
+    page_user_profile = get_object_or_404(Profile, user=page_user)
+    print(f"{page_user_profile} is active pageuser")
     posts = Post.objects.filter(author__slug=user)
 
     print(f'This is the {page_user.id}')
-    print(f'This is {profile.id}\'s profile')
+    print(f'This is {profile.id}\'s profile id')
+    print(f'This is {profile}\'s profile')
+    
     return render(request, "network/profile.html", {
         'posts' : posts,
-        'user' : profile.user,
+        'user' : profile,
         'followers': profile.followers,
         'followings': profile.following,
-        "page_user": page_user.id
+        "page_user": page_user,
+        "page_user_profile": page_user_profile
     })
 
+def following_posts(request, user):
+    #get the user and user's profile
+    get_user_object = get_object_or_404(User, username=user)
+    print(get_user_object)
+    get_profile = get_object_or_404(Profile, user=get_user_object)
+    print(get_profile)
+
+    #get the people that the user follows
+    profile_following = get_profile.following.all()
+    all_post  = Post.objects.all()
+    print(all_post)
+
+    first_profile = profile_following[0]
+    print(profile_following)
+    print(first_profile)
+    first_profile_obj = Profile.objects.filter(user=first_profile)
+    print(first_profile_obj)
+    first_profile_posts = Post.objects.filter(author=first_profile_obj[0])
+    print(first_profile_posts)
+
+    select_profiles = [i for i in profile_following]
+    print(select_profiles)
+    p = [ i.slug for i in select_profiles]
+    print(p)
+    select_posts = [i for i in all_post if i.author != None and i.author.user.slug in p]
+
+    print(select_posts)
+
+
+
+    
+
+    # for i in all_post:
+    #     # if i.author in profile_following:
+    #     select_posts.update(i)
+    
+        # print(select_posts)
+
+
+    return render(request, 'network/following_posts.html', {
+        'profiles_following': profile_following,
+        'posts': select_posts
+    } )
+    #get the post of the 'followings'
 
 @login_required
 def like(request, id):
@@ -130,6 +184,35 @@ def like(request, id):
         return HttpResponseRedirect(reverse('login'))
     
 
+def follow(request, user):
+    active_user = request.user
+    print(f'activer user is {user}')
+    user_profile = get_object_or_404(Profile, user=active_user)
+    print(f'user profile is {user_profile}')
+    user_to_follow = get_object_or_404(User, username=user)
+    print(f'user to follow is {user_to_follow}')
+    try:
+        user_profile = get_object_or_404(Profile, user=active_user)
+        print(f'user profile is {user_profile}')
+        user_to_follow = get_object_or_404(User, username=user)
+        print(f'user to follow is {user_to_follow}')
+        data = serializers.serialize( "json", Profile.objects.filter(user=active_user), fields=('users', 'followers', 'following'))
+        if user_to_follow != user_profile.user:
+            if user_to_follow not in user_profile.following.all():
+                
+                user_profile.following.add(user_to_follow)
+                user_profile.save()
+                print(f"{user_to_follow} followed")
+                return JsonResponse({"following": "True", 'data': data})
+            else:
+                user_profile.following.remove(user_to_follow)
+                user_profile.save()
+                print(f"{user_to_follow} unfollowed")
+                return JsonResponse({"following": "False", 'data': data})
+                
+        return JsonResponse({"error":"Own Profile can not be followed"})
+    except Profile.DoesNotExist:
+        return JsonResponse({"error" : "Profile does not exists"})
 
 
     # user_profile = get_object_or_404(Profile, user=request.user)
