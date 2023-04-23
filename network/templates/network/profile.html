@@ -6,6 +6,7 @@
 <div class="profile-intro" style="padding:1rem;">
     <h7 style="color: gainsboro; padding:1rem; font-weight:600; font-size:smaller;">Profile page</h7>
     <h6 style="margin-top: 0rem; font-weight: bold; color: blue; padding:0rem 1rem;">{{user}}'s Hive</h6>
+    <i id="user_cred">{{user}}</i>
 </div>
 <div class="profile-summary">
     <div class="profile-summary-img" style="align-self: center; padding: .5rem;">
@@ -29,7 +30,7 @@
             {% endfor %}
         </div>
         <div class="follow-button-div" style="align-self: center; padding:0rem 1rem;">
-            <button class="follow-button">Follow</button>
+            <button onclick="location.href='{%url 'follow' user%}" id="follow" class="follow-button">Follow</button>
         </div>
     </div>
     
@@ -48,11 +49,11 @@
         </div>
         <div>
             <h6 class="buzz-text">{{post.body}}</h6>
-            {% if post.author.user.id is page_user %}
+            {% if post.author.user.id is page_user.id %}
             <button class="edit_post edit-button">Edit</button>
             
             {% else  %}
-                {% if post in user_profile.likes.all %}
+                {% if post in page_user_profile.likes.all %}
                 {%csrf_token%}
                 <button class="like_button" onclick="location.href='{%url 'like' post.id%}"> Dislike </button>
                 {% else %}
@@ -60,7 +61,7 @@
                 <button class="like_button" onclick="location.href='{%url 'like' post.id%}"> Like </button>
                 {%endif%}
                 {% endif %}
-                {% if post.author.user.id is page_user %}
+                {% if post.author.user.id is page_user.id %}
                 <div class="editPanels hidePanels" style="">
                     Edit Post
                     <div>
@@ -95,3 +96,5 @@
 </div>
 
 {% endblock %}
+
+{% comment %} onclick="location.href='{%url 'like' post.id%}" {% endcomment %}
