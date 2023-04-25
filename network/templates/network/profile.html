@@ -17,20 +17,24 @@
         <div class="profile-summary-follow" style="margin: 0rem 1rem; align-self:center;">
             
             <p style="color:#535658; font-weight:700; font-size: smaller; margin-bottom:2px;">Following:</p>
-            <h8 style="color: aquamarine; padding:0rem .2rem; font-weight:900;">{{followings.count}}</h8>
+            <h8 id="following-count" style="color: aquamarine; padding:0rem .2rem; font-weight:900;">{{followings.count}}</h8>
             {% for following in followings.all%}
             <h8 style="margin-bottom:0px;"><a href={% url 'following_posts' user%}> {{following}} </a></h8>
             {% endfor %}
         </div>
         <div class="profile-summary-follow" style="margin: 0rem 1rem; align-self: center;">
             <p style="color:#535658; font-weight:700; font-size: smaller; margin-bottom:2px;">Followers:</p>
-            <h8 style="color: aquamarine; font-weight:900; padding:0rem .2rem;">{{followers.count}}</h8>
+            <h8 id="followers-count" style="color: aquamarine; font-weight:900; padding:0rem .2rem;">{{followers.count}}</h8>
             {% for follower in followers.all%}
             <h8 style="margin-bottom:0px;">{{follower}}</h8>
             {% endfor %}
         </div>
         <div class="follow-button-div" style="align-self: center; padding:0rem 1rem;">
-            <button onclick="location.href='{%url 'follow' user%}" id="follow" class="follow-button">Follow</button>
+            {% if follow_status %}
+                <button onclick="location.href='{%url 'follow' user%}" id="follow" class="follow-button">Unfollow</button>
+            {% else %}
+                <button onclick="location.href='{%url 'follow' user%}" id="follow" class="follow-button">Follow</button>
+            {% endif %}
         </div>
     </div>
     

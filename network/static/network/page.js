@@ -65,10 +65,14 @@ function followUser(user){
     .then(data => {
         console.log(data)
         let followButton = document.getElementById("follow")
+        let followersCount = document.getElementById("followers-count")
+        let followerCountInt = parseInt(followersCount.innerHTML)
         if(data.following == "True"){
-            followButton.innerHTML = "Following"
+            followButton.innerHTML = "Unfollow"
+            followersCount.innerHTML = followerCountInt + 1
         }else{
             followButton.innerHTML = "Follow"
+            followersCount.innerHTML = followerCountInt - 1
         }
     })
 }
