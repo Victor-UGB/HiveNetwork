@@ -1,10 +1,12 @@
 console.log("Hello World");
 document.addEventListener('DOMContentLoaded', function(){
-
     const likeButtons = document.getElementsByClassName('like_button');
     const editButtons = document.getElementsByClassName('edit-button')
     const likeCount = document.getElementsByClassName("like_count")
+    const follow = document.getElementById("follow")
+    const user = document.getElementById("user_cred")
     console.log(likeButtons.innerHTML)
+    console.log(`test ${user.innerHTML}`)
 
     for (var i = 0; i<likeButtons.length; i++){
         let id = i 
@@ -18,6 +20,7 @@ document.addEventListener('DOMContentLoaded', function(){
         let activeEditButton = editButtons[i]
         activeEditButton.addEventListener('click', () => editHandler(id , activeEditButton = activeEditButton))
     }
+    follow.addEventListener('click', () => followUser(user.innerHTML))
     // document.querySelector(".edit_post").addEventListener("click", editPost(id))
     likehandler()
 });
@@ -50,9 +53,29 @@ function editHandler(id, activeEditButton){
         console.log(`This is the buzz id ${buzzId} and panel id ${i}`)
 
     }
+};
 
-
-    };
+// function followUser(){
+//     console.log("follow user button clicked")
+// }
+function followUser(user){
+    console.log(`${user} is to follow`)
+    fetch(`follow/${user}`)
+    .then(response => response.json())
+    .then(data => {
+        console.log(data)
+        let followButton = document.getElementById("follow")
+        let followersCount = document.getElementById("followers-count")
+        let followerCountInt = parseInt(followersCount.innerHTML)
+        if(data.following == "True"){
+            followButton.innerHTML = "Unfollow"
+            followersCount.innerHTML = followerCountInt + 1
+        }else{
+            followButton.innerHTML = "Follow"
+            followersCount.innerHTML = followerCountInt - 1
+        }
+    })
+}
 
 
 
