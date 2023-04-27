@@ -120,6 +120,10 @@ form{
     border: 0;
     border-radius: 2px;
 }
+.follow-modal{
+    color:gainsboro;
+    cursor: pointer;
+}
 
 @media all and (max-width: 980px){
     body{
