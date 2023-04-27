@@ -19,14 +19,20 @@
             <p style="color:#535658; font-weight:700; font-size: smaller; margin-bottom:2px;">Following:</p>
             <h8 id="following-count" style="color: aquamarine; padding:0rem .2rem; font-weight:900;">{{followings.count}}</h8>
             {% for following in followings.all%}
-            <h8 style="margin-bottom:0px;"><a href={% url 'following_posts' user%}> {{following}} </a></h8>
+            <div id="following-modal" class="follow-modal">
+                show following
+            <h8 style="margin-bottom:0px; display: none;"><a href={% url 'following_posts' user%}> {{following}} </a></h8>
+            </div>
             {% endfor %}
         </div>
         <div class="profile-summary-follow" style="margin: 0rem 1rem; align-self: center;">
             <p style="color:#535658; font-weight:700; font-size: smaller; margin-bottom:2px;">Followers:</p>
             <h8 id="followers-count" style="color: aquamarine; font-weight:900; padding:0rem .2rem;">{{followers.count}}</h8>
             {% for follower in followers.all%}
-            <h8 style="margin-bottom:0px;">{{follower}}</h8>
+            <div id="followers-modal" class="follow-modal">
+                show followers
+                <h8 style="margin-bottom:0px; display:none;">{{follower}}</h8>
+            </div>
             {% endfor %}
         </div>
         <div class="follow-button-div" style="align-self: center; padding:0rem 1rem;">

@@ -5,6 +5,8 @@ document.addEventListener('DOMContentLoaded', function(){
     const likeCount = document.getElementsByClassName("like_count")
     const follow = document.getElementById("follow")
     const user = document.getElementById("user_cred")
+    const seeFollowing = document.getElementById("following-modal")
+    const seeFollowers = document.getElementById("followers-modal")
     console.log(likeButtons.innerHTML)
     console.log(`test ${user.innerHTML}`)
 
@@ -21,6 +23,8 @@ document.addEventListener('DOMContentLoaded', function(){
         activeEditButton.addEventListener('click', () => editHandler(id , activeEditButton = activeEditButton))
     }
     follow.addEventListener('click', () => followUser(user.innerHTML))
+    seeFollowing.addEventListener('click', () => reloadPage("following-modal", showFollowModal))
+    seeFollowers.addEventListener('click', () => reloadPage("followers-modal", showFollowModal))
     // document.querySelector(".edit_post").addEventListener("click", editPost(id))
     likehandler()
 });
@@ -198,5 +202,39 @@ function save_edit(id){
         })
     })
     .then(response)
+}
+
+function showFollowModal(modalId){
+    let followOption = document.getElementById(modalId)
+    console.log(followOption.lastElementChild.style.display === "none")
+    if(followOption.lastElementChild.style.display === "none"){
+        followOption.lastElementChild.style.display = "block"
+    }else{
+        followOption.lastElementChild.style.display = "none"
+    }
+}
+
+// async function reloadPage(modalId){
+//     () => window.location.reload()
+//     console.log("asyn function running")
+//     console.log(modalId)
+//     return modalId
+// }
+
+// reloadPage(modalId)
+// .then(function(value){ showFollowModal(value) }
+// )
+
+// async function reloadPage(modalId){
+//     () => window.location.reload()
+//     let myPromise = new Promise((resolve) => {
+//         resolve(modalId)
+//     });
+//     showFollowModal(await myPromise)
+// }
+
+async function reloadPage(modalId, callBack){
+    window.location.reload()
+    window.onload = callBack(modalId)
 }
 
