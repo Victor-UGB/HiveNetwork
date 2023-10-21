@@ -20,7 +20,7 @@
                 <div style="margin:auto; text-align:center; background-color:#1c1c1c; padding:2rem; border-radius:10px; display:flex; flex-direction:column">
                     <h2 style="background-color: #1c1c1c">Following</h2>
                 {% for following in followings.all%}
-                <h8 style="margin-bottom:0px; font-size:larger; font-weight:800; background-color: #1c1c1c"><a style="background-color:#1c1c1c;" href={% url 'following_posts' user%}> {{following}} </a></h8>
+                <h8 style="margin-bottom:0px; font-size:larger; font-weight:800; background-color: #1c1c1c"><a style="background-color:#1c1c1c; color:aquamarine;" href={% url 'following_posts' user%}> {{following}} </a></h8>
                 {% endfor %}
                 </div>
             </div>
@@ -32,7 +32,7 @@
                 <div style="margin:auto; text-align:center; background-color:#1c1c1c; padding:2rem; border-radius:10px; display:flex; flex-direction:column">
                     <h2 style="background-color: #1c1c1c">Followers</h2>
                 {% for follower in followers.all%}
-                <h8 style="margin-bottom:0px; font-size:larger; font-weight:800; background-color: #1c1c1c"><a style="background-color:#1c1c1c;" href={% url 'following_posts' user%}> {{follower}} </a></h8>
+                <h8 style="margin-bottom:0px; font-size:larger; font-weight:800; background-color: #1c1c1c"><a style="background-color:#1c1c1c; color:aquamarine;" href={% url 'following_posts' user%}> {{follower}} </a></h8>
                 {% endfor %}
                 </div>
             </div>
@@ -58,7 +58,7 @@
     <div class="buzz-profile-pic"></div>
     <div class="buzz">
         <div style="display:flex; justify-content: space-between;">
-            <h6 class="buzz-cred"> <a href="{%url 'profile' post.author%}">@{{post.author}} </a> <span style="font-size:13px; font-weight:400; color: gainsboro;">buzzed</span> </h6>
+            <h6 class="buzz-cred"> <a href="{%url 'profile' post.author%}" style="color:#e0eaf3; font-weight:800; font-size:.8rem;">@{{post.author}} </a> <span style="font-size:13px; font-weight:200; color: aquamarine;">buzzed</span> </h6>
             <i style="color:gainsboro;">{{post.created_on}}</i>
         </div>
         <div>
