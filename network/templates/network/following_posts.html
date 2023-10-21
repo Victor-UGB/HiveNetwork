@@ -2,48 +2,72 @@
 {% load static %}
 
 {% block body %}
-<h1>Buzz from Beez you Follow</h1>
-{% for post in posts%}
-<h1>{{post.body}}</h1>
-{% endfor %}
-{% for post in posts%}
-<div class="buzz-body">
-    <div class="buzz-profile-pic"></div>
-    <div class="buzz">
-        <i>{{post.created_on}}</i>
-        <h6 > <a href="{%url 'profile' post.author%}">@{{post.author}} </a> <span style="font-size:13px; font-weight:400;">buzzed</span> </h6>
+<h4 class="sub-title" style="font-size:smaller;">Buzz from Beez you Follow</h4>
+<div style="background-color: #f8f9fa; border-radius: 18px;" class="posts">
         
-        <div><h6 style="padding: 1rem 0rem;" class="buzz-text">{{post.body}}</h6>
-            <hr style="border-top: 1px solid black;">
-            {% if post.author.user.id is page_user %}
-            <button class="edit_post edit-button">Edit</button>
-            
-            {% else  %}
-                {% if post in user_profile.likes.all %}
-                {%csrf_token%}
-                <button class="like_button" onclick="location.href='{%url 'like' post.id%}"> Dislike </button>
-                {% else %}
-                {%csrf_token%}
-                <button class="like_button" onclick="location.href='{%url 'like' post.id%}"> Like </button>
-                {%endif%}
-        {% endif %}
-        </div>
-        {% if post.author.user.id is page_user %}
-        <div class="editPanels hidePanels" style="">
-            Edit Post
-            <div>
-                <form action="{% url 'save_edit' post.id %}" method="POST">
-                    {% csrf_token %}
-                    <input type="text" value="{{post.body}}" name="post-edit" autofocus>
-                    <input type="submit">
-                </form>
+        {% for post in posts %}
+        <div class="buzz-body" data-post-id= {{post.id}}>
+            {% comment %} <div style="display:flex;"> {% endcomment %}
+            <div class="buzz-profile-pic"></div>
+            <div class="buzz">
+                <div style="display:flex; justify-content: space-between;">
+                    <h6 class="buzz-cred"> <a href="{%url 'profile' post.author%}" style="color:#e0eaf3; font-weight:800; font-size:.8rem;">@{{post.author}} </a> <span style="font-size:13px; font-weight:200; color: aquamarine;">buzzed</span> </h6>
+                    <i style="color:gainsboro;">{{post.created_on}}</i>
+                </div>
+                <div>
+                    <h6 class="buzz-text">{{post.body}}</h6>
+                    <div style="display:flex; padding: 1rem 0rem;">
+                        <div style=" font-weight: 600; width:100%; color:gray; font-size:smaller; align-self:center;" class="post_like"><span id="like-count" class="like_count">{{post.liked.all.count}} </span>like(s)</div>
+                        <div style="width:100%;">
+                        {% if post in user_profile.likes.all %}
+                        {%csrf_token%}
+                        <button class="like_button" onclick="location.href='{%url 'like' post.id%}"> Dislike </button>
+                        {% else %}
+                        {%csrf_token%}
+                        <button class="like_button" onclick="location.href='{%url 'like' post.id%}"> Like </button>
+                        {%endif%}
+                        </div>
+                        <div style="width:100%;">
+                        {% if post.author.user.id is page_user %}
+                        <button class="edit_post edit-button" id="edit_post">Edit</button>
+                        {% else  %}
+                        <button class="edit-button" id="">.</button>
+                        {% endif %}
+                        </div>
+                    </div>
+                </div>
+                {% if post.author.user.id is page_user %}
+                <div class="editPanels hidePanels" style="">
+                    Edit Post
+                    <div>
+                        <form action="{% url 'save_edit' post.id %}" method="POST">
+                            {% csrf_token %}
+                            <input type="text" value="{{post.body}}" name="post-edit" autofocus>
+                            <input type="submit">
+                        </form>
+                    </div>
+                </div>
+                {% endif %}
             </div>
         </div>
-        {% endif %}
-        
+        {%endfor%}
     </div>
-    <p><span id="like-count" class="like_count">{{post.liked.all.count}} </span>like(s)</p>
+
+<div class="pagination">
+    <span class="step-links">
+        {% if posts.has_previous %}
+            <a href="?page=1">&laquo; first</a>
+            <a href="?page={{ posts.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ posts.number }} of {{ posts.paginator.num_pages }}.
+        </span>
+
+        {% if posts.has_next %}
+            <a href="?page={{ posts.next_page_number }}">next</a>
+            <a href="?page={{ posts.paginator.num_pages }}">last &raquo;</a>
+        {% endif %}
+    </span>
 </div>
-<hr style="margin:0;">
-{%endfor%}
 {% endblock %}

@@ -14,5 +14,5 @@ class NewPostForm(ModelForm):
         }
         fields = ('body',)
         widgets = {
-            'body': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Buzz here', 'style': 'height:5rem; margin-bottom: 1rem; font-weight:400; background-color: aquamarine; border:none;'})
+            'body': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Buzz here', 'style': 'height:5rem; margin-bottom: 1rem; font-weight:400; font-size: large; background-color: transparent; border: none;'})
         }

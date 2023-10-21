@@ -1,31 +1,69 @@
 console.log("Hello World");
 document.addEventListener('DOMContentLoaded', function(){
     const likeButtons = document.getElementsByClassName('like_button');
-    const editButtons = document.getElementsByClassName('edit-button')
+    const likeBtns = document.querySelectorAll(".like_button")
+    const editButtons = document.getElementsByClassName('edit_post')
     const likeCount = document.getElementsByClassName("like_count")
     const follow = document.getElementById("follow")
     const user = document.getElementById("user_cred")
-    const seeFollowing = document.getElementById("following-modal")
-    const seeFollowers = document.getElementById("followers-modal")
-    console.log(likeButtons.innerHTML)
-    console.log(`test ${user.innerHTML}`)
+    const seeFollowing = document.getElementById("show-following")
+    const seeFollowers = document.getElementById("show-followers")
+    // console.log(likeButtons.innerHTML)
+    // console.log(`test ${user.innerHTML}`)
 
-    for (var i = 0; i<likeButtons.length; i++){
-        let id = i 
-        let activeButton = likeButtons[i] 
-        let activeLikeCount = likeCount[i]
-        activeButton.addEventListener('click', () => likehandler(id, activeButton=activeButton, activeLikeCount=activeLikeCount));
-    }
+    likeBtns.forEach(button => {
+        button.addEventListener('click', () =>{
+            const postElement = button.closest('.buzz-body')
+            const postId = postElement.getAttribute('data-post-id')
+            const likeCountElement = postElement.querySelector('.like_count')
+            const likeCount = parseInt(likeCountElement.textContent, 10)
+            console.log(likeCount)
+            
+            // postElement.children.
+            
+            console.log(likeCountElement)
+            console.log(postElement)
+
+            const requestOption = {
+                method:"POST",
+                header: "application/json"
+            }
+
+            fetch(`/like/${postId}`,{
+                method: "GET"
+            })
+            .then(response => response.json())
+            .then(post => {
+                if(post.liked == false){
+                    likeCountElement.innerHTML = likeCount -1
+                    button.innerHTML  = "Like"
+                }else{
+                    likeCountElement.innerHTML = likeCount +1
+                    button.innerHTML = "Dislike"
+                }
+            })
+
+        })
+    })
+
+    // for (var i = 0; i<likeButtons.length; i++){
+    //     let id = i 
+    //     let activeButton = likeButtons[i]
+    //     console.log(activeButton)
+    //     let activeLikeCount = likeCount[i]
+    //     console.log(activeLikeCount)
+    //     activeButton.addEventListener('click', () => likehandler(id, activeButton=activeButton, activeLikeCount=activeLikeCount));
+    // }
     
     for( var i = 0; i<editButtons.length; i++){
         let id = i 
         let activeEditButton = editButtons[i]
         activeEditButton.addEventListener('click', () => editHandler(id , activeEditButton = activeEditButton))
     }
-    follow.addEventListener('click', () => followUser(user.innerHTML))
-    seeFollowing.addEventListener('click', () => reloadPage("following-modal", showFollowModal))
-    seeFollowers.addEventListener('click', () => reloadPage("followers-modal", showFollowModal))
-    // document.querySelector(".edit_post").addEventListener("click", editPost(id))
+    follow.addEventListener('click', () => reloadPage("follow",followUser(user.innerHTML)))
+    seeFollowing.addEventListener('click', () => showFollowModal("following-modal"))
+    seeFollowers.addEventListener('click', () => showFollowModal("followers-modal"))
+    // document.querySelector(".edit_post").addEventListener("click", editPost(id))x
     likehandler()
 });
 
@@ -80,44 +118,6 @@ function followUser(user){
         }
     })
 }
-
-
-
-
-// function editHandler(id, activeEditButton){
-//     console.log(`editButton clicked ${activeEditButton}`)
-    
-//     const container = activeEditButton.parentNode
-//     const editbuttonParent = container.parentElement
-//     container.style.display = 'none'
-//     console.log(`editButton clicked ${editbuttonParent}`)
-//     const editForm= document.createElement('div')
-//     .
-//     editForm.innerHTML = `<div><form><input type="text" value="${post.body}"><input type="submit"></form> </div>`
-//     console.log(editForm)
-//     editbuttonParent.append(editForm)
-//     // document.querySelector(".")
-//     // fetch(`posts/${id}`, {
-//     // })
-//     // .then(response => response.json())
-//     // .then(post =>{
-//     //     const editbuttonParent = activeEditButton.parentElement
-//     //     const editForm = `<div><form><input type="text" value"${post.text}"></form> <input type="submit"></div>`
-
-//     // } )
-// }
-
-// function countLikes(id, action){
-//     fetch(`like/${id}`)
-//     .then(response => response.json())
-//     .then(post => {
-//         if (action == 'disliked'){
-//             post.
-//         }
-//     })
-// }
-
-
 
 function likehandler(id, activeButton, activeLikeCount){
     console.log('button element clicked')
@@ -205,12 +205,16 @@ function save_edit(id){
 }
 
 function showFollowModal(modalId){
-    let followOption = document.getElementById(modalId)
-    console.log(followOption.lastElementChild.style.display === "none")
-    if(followOption.lastElementChild.style.display === "none"){
-        followOption.lastElementChild.style.display = "block"
+    let el = document.getElementById(modalId)
+    console.log(el)
+    if(el.style.display === "none"){
+        el.style.display = "flex"
+        el.style.zIndex = 1
+        document.body.style.overflow = "hidden"
     }else{
-        followOption.lastElementChild.style.display = "none"
+        el.style.display = "none"
+        el.style.zIndex = 0
+        document.body.style.overflow = "scroll"
     }
 }
 

@@ -8,30 +8,29 @@ html{
 
 *, body{
     font-family: 'Montserrat', sans-serif !important;
-    background-color: #171819;
+    background-color: #0b0b0b;
 }
 
 .buzz{
     display: flex;
     flex-direction: column ;
-    margin: 1rem;
+    margin-inline: 1rem;
     width: 100%;
     
 }
 
 .buzz-text{
 
-    color: aquamarine;
+    color: aliceblue;
 }
 
 .buzz-button{
-    width: 100%;
     background-color:rgb(17, 95, 229);
-    padding: .4rem;
-    text-align: center;
+    padding: .4rem 1.2rem;
+    float: right;
     border: none;
     color: white;
-    border-radius: 2px;
+    border-radius: 20px;
     font-weight: 600;
 }
 
@@ -47,6 +46,25 @@ html{
     font-weight: 700;
 }
 
+.auth-link{
+    font-size: small;
+    color: rgb(49, 50, 54);
+    background-color: aliceblue;
+    border-radius: 2px;
+    font-weight: 800;
+    padding: .5rem 1.5rem;
+}
+
+.navi{
+   width: 100%;
+   display: flex; 
+   gap: .1rem;
+}
+
+.navi-item{
+    width: 100%;
+}
+
 i{
     font-weight:lighter !important;
     font-size: small;
@@ -54,43 +72,58 @@ i{
 }
 
 form{
-    margin: 1rem !important;
+    /* margin-block: 1rem !important; */
 }
 
 .buzz-body{
     display: flex !important;
-    
+    border-top: 1px solid #525252;
+    padding: 1rem;
 }
 
 .sub-title{
-    padding: 3rem 0rem 2rem 0rem; 
+    padding: 1rem; 
     text-align: center !important;
     color: gainsboro;
 }
 
+.posts{
+    background-color: #f8f9fa; 
+    border-radius: 18px;
+}
 .buzz-profile-pic{
-    min-width: 3rem !important;
-    padding: 1.5rem;
+    width: 2.5rem;
+    height: 2.5rem;
+    padding: 1rem;
+    background-color: gray;
+    border-radius: 100px;
+    position: relative;
 }
 
 .like_button{
     display: flex;
-    margin: 2rem 0 1rem 0;
-    max-width: max-content;
-    color: white; 
-    border: 1px rgb(31, 31, 190) solid;
-    border-radius: 2px;
+    width: 100%;
+    color: #525252; 
+    background-color: aliceblue;
+    border: none;
+    font-weight:700;
     font-size: smaller;
-    padding: 2px 12px;
+    padding: .4rem 12px;
+}
+.edit-button{
+    display: flex;
+    width: 100%;
+    color: aliceblue;
+    outline: 1px solid aliceblue;
+    outline-offset: -1px;
+    border: none;
+    font-weight:700;
+    font-size: smaller;
+    padding: .4rem 12px;
 }
 
-
-.edit_post{
-    display: flex;
-    margin: 0 0 1.5rem 0;
-    max-width: max-content;
-    color: gray; 
-    border: none;
+.editPanels, .editPanels input{
+    color: aliceblue;
 }
 
 #activePanel{
@@ -108,7 +141,7 @@ form{
 /* Profile Page */
 .profile-summary{
     display: flex; 
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
     justify-content: start;
     padding: 0rem 2rem;
 }
@@ -121,6 +154,14 @@ form{
     border-radius: 2px;
 }
 .follow-modal{
+    position: fixed;
+    background-color: #ffffff55;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    top: 0rem;
+    right: 0rem;
     color:gainsboro;
     cursor: pointer;
 }
@@ -138,7 +179,7 @@ form{
         border-radius: 8px;
     }
     .buzz-form{
-        padding: 2rem;
+        /* padding: 2rem; */
     }
     .navbar-brand{
         font-size: 4rem !important;
@@ -147,7 +188,7 @@ form{
         margin-top:1rem;
         font-size: 2.5rem !important;
         padding: 1.2rem ;
-        border-radius: 8px;
+        border-radius: 20px;
     }
     .sub-title{
         padding: 5rem 0rem 5rem 0rem;
@@ -159,17 +200,16 @@ form{
         font-size: 2rem !important;
     }
     .buzz-cred{
-        font-size: 2.5rem;
+        font-size: 1.5rem;
     }
     .buzz-cred span{
-        font-size: 2rem !important;
+        font-size: 1.7rem !important;
     }
     .buzz-text{
         font-size: 2.5rem;
         padding: 1rem 0px;
     }
     .buzz-profile-pic {
-        min-width: 8rem !important;
         padding: 1.5rem;
     }
     .buzz-profile-pic div{
@@ -180,11 +220,6 @@ form{
         padding: 2rem .5rem;
     }
     .like_button{
-        font-size: 2rem;
-        padding: .6rem 3rem;
-        margin: 3rem 0 2rem 0;
-    }
-    .edit-button{
         font-size: 2rem;
         padding: .6rem 3rem;
         margin: 3rem 0 2rem 0;
@@ -221,7 +256,6 @@ form{
         display: flex;
     }
     .profile-summary-img{
-        padding: 2rem !important;
     }
     .profile-summary-img > div{
         width: 10rem !important;
